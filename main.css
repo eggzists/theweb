@@ -1,0 +1,253 @@
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Space Mono Regular'), local('SpaceMono-Regular'), url(path/to/space-mono-regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Space Mono Bold'), local('SpaceMono-Bold'), url(path/to/space-mono-bold.woff2) format('woff2');
+}
+
+* {
+    -webkit-user-select: none;  /* Safari */
+    -ms-user-select: none;      /* IE 10 and IE 11 */
+    user-select: none;          /* Standard syntax */
+}
+
+/* Allow selection for specific elements if needed (like code blocks) */
+pre, code {
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+.space-mono-regular {
+  font-family: 'Space Mono', monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.space-mono-bold {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.space-mono-regular-italic {
+  font-family: 'Space Mono', monospace;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.space-mono-bold-italic {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-style: italic;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: black;
+  color: white;
+  font-family: 'Space Mono', monospace;
+  font-weight: 300;
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  padding: 2em;
+  padding-top: 4em;
+  padding-left: 5em;
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 1em;
+    font-size: 14px;
+  }
+}
+
+.links-ti {
+  margin-top: 2em;
+  font-size: 15px;
+  text-decoration: none;
+  color: #7460E0;
+  transition: color 0.2s ease;
+  font-family: 'Space Mono';
+  font-weight: 700;
+  display: inline-block;
+}
+
+#xdot-com {
+  padding-right: 10px;
+}
+
+#x-com {
+  padding-left: 10px;
+}
+
+.links-ti:hover {
+  color: #CCCCCC;
+}
+
+.container {
+  max-width: 400px;
+  width: 100%;
+  padding: 1em;
+  padding-top: 10px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1em 10em;
+  margin-bottom: 5px;
+  padding-left: 0px;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 0.8em;
+}
+
+h1 span {
+  color: #b36fff;
+  font-size: 0.9em;
+}
+
+.tinu {
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Space Mono';
+  font-weight: 700;
+  font-size: 20px;
+  color: #FFFFFF;
+}
+
+.breadcrumbs {
+  background-color: #000000;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+  color: #7460E0;
+  transition: color 0.2s ease;
+}
+
+.breadcrumbs a:hover {
+  color: #CCCCCC;
+  text-decoration: none;
+}
+
+.about {
+  margin-top: 2em;
+}
+
+.about-text {
+  max-width: 600px;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.7;
+}
+
+.featured {
+    margin: 6em 0 4em 0;
+    max-width: 600px;
+}
+
+.featured-title {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1.2em;
+    color: #7460E0;
+    margin-bottom: 1.5em;
+}
+
+.featured-content {
+    border-left: 2px solid #7460E0;
+    padding-left: 1.5em;
+    margin-left: 0.5em;
+}
+
+.featured-date {
+    font-size: 0.9em;
+    color: #666;
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.featured-project {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin: 0.5em 0;
+    color: #FFFFFF;
+}
+
+.featured-description {
+    color: #CCCCCC;
+    line-height: 1.6;
+    margin-top: 1em;
+}
+
+.featured-link {
+    color: #7460E0;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 0.5em;
+    transition: color 0.2s ease;
+}
+
+.featured-link:hover {
+    color: #FFFFFF;
+}
+
+/* Adjust existing container styles */
+.content-container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2em;
+    align-self: flex-start;
+    position: relative;
+    z-index: 1;
+}
+
+/*do not mess with this section unless you have 2 espresso shots */
+header a {
+  color: #7460E0;  /* Changed back to original color */
+  text-decoration: none;
+  margin: 0 0.5em;
+  font-size: 1em;
+  font-weight: bold;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Space Mono';
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* Remove hover effect */
+header a:hover {
+  color: #CCCCCC;  /* Change to light color on hover */
+}
+/*okay thats it*/

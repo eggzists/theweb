@@ -1,0 +1,114 @@
+* {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+pre, code {
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+body {
+    overflow-x: hidden;
+    background-color: black;
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-weight: 300;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 2em;
+    padding-top: 4em;
+    position: relative;
+    z-index: 1;
+}
+
+.content-container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2em;
+    align-self: flex-start;
+}
+
+.tinu {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 20px;
+    color: #FFFFFF;
+    margin-bottom: 1em;
+}
+
+.quotes-container {
+    margin-top: 4em;
+    cursor: pointer;
+    padding: 2em;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.quotes-container:hover {
+    background: rgba(116, 96, 224, 0.05);
+}
+
+.quote {
+    transition: opacity 0.3s ease;
+}
+
+.quote-text {
+    font-size: 1.4em;
+    line-height: 1.6;
+    margin-bottom: 1em;
+    color: #FFFFFF;
+}
+
+.quote-author {
+    font-size: 1em;
+    color: #7460E0;
+    margin-bottom: 0.5em;
+}
+
+.quote-context {
+    font-size: 0.9em;
+    color: #666;
+    font-style: italic;
+}
+
+.quote-instruction {
+    margin-top: 3em;
+    color: #666;
+    font-size: 0.8em;
+    text-align: center;
+    font-style: italic;
+}
+
+.morse-code {
+    margin-top: 4em;
+    color: #FFFFFF;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.7;
+}
+
+.breadcrumbs a {
+    text-decoration: none;
+    color: #7460E0;
+    transition: color 0.2s ease;
+}
+
+.breadcrumbs a:hover {
+    color: #CCCCCC;
+    text-decoration: none;
+} 
