@@ -71,6 +71,39 @@ body {
     padding: 1em;
     font-size: 14px;
   }
+
+  .content-container {
+    padding: 1em;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1em;
+  }
+
+  header a {
+    margin: 0.5em 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    padding: 0.5em;
+    font-size: 12px;
+  }
+
+  .content-container {
+    padding: 0.5em;
+  }
+
+  header {
+    padding: 0.5em;
+  }
+
+  header a {
+    font-size: 12px;
+  }
 }
 
 .links-ti {
