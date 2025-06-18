@@ -28,7 +28,13 @@ const quotes = [
         text: "The question of whether computers can think is like the question of whether submarines can swim.",
         author: "Edsger W. Dijkstra",
         context: "On artificial intelligence"
+    },
+    {
+        "text": "It’s not a faith in technology. It’s faith in people.",
+        "author": "Steve Jobs",
+        "context": "On the role of human innovation in technological progress"
     }
+    
     // Add more quotes as needed
 ];
 

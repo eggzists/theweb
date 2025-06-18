@@ -6,7 +6,7 @@ const pageNames = {
   "/about/about.html": "about",
   "/quotes/quotes.html": "quotes",
   "/posts/blog1.html": "welcome",
-  "/posts/blog2.html": "cicada 3301",
+  "/posts/blog2.html": "what even is reality?",
   "/posts/blog3.html": "the big O",
   "/posts/blog4.html": "delusion",
   "/posts/blog5.html": "chronicle",
