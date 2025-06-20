@@ -337,19 +337,37 @@ header a:hover {
   header {
     padding: 1em 0.5em;
   }
+  /* Remove mobile nav toggle: always show nav links */
   #main-nav a {
-    display: none;
+    display: inline-block !important;
+    margin: 0 0.5em;
+    font-size: 1em;
   }
-  #main-nav.open a {
-    display: block;
-    margin: 1em 0;
-    font-size: 1.2em;
-  }
+
   #nav-toggle {
-    display: inline-block;
-    position: absolute;
-    right: 0;
-    top: 0;
+    display: none !important;
+  }
+}
+
+/* Optional: adjust spacing for mobile */
+@media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1em 0.5em;
+  }
+  #main-nav a {
+    display: inline-block !important;
+    margin: 0 0.5em 0.5em 0;
+    font-size: 1em;
+  }
+}
+
+/* Optional: even smaller screens */
+@media screen and (max-width: 480px) {
+  #main-nav a {
+    font-size: 0.95em;
+    margin: 0 0.3em 0.5em 0;
   }
 }
 
