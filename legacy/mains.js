@@ -7,10 +7,7 @@ const pageNames = {
   "/quotes/quotes.html": "quotes",
   "/posts/blog1.html": "welcome",
   "/posts/blog2.html": "what even is reality?",
-  "/posts/blog3.html": "the big O",
-  "/posts/blog4.html": "delusion",
-  "/posts/blog5.html": "chronicle",
-  "/posts/blog6.html": "learning curve",
+  "/posts/blog3.html": "n - np",
 };
 
 function generateBreadcrumbs() {

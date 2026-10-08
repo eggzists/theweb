@@ -12,13 +12,14 @@
   src: local('Space Mono Bold'), local('SpaceMono-Bold'), url(path/to/space-mono-bold.woff2) format('woff2');
 }
 
+/* Allow text selection for better readability */
 * {
-    -webkit-user-select: none;  /* Safari */
-    -ms-user-select: none;      /* IE 10 and IE 11 */
-    user-select: none;          /* Standard syntax */
+    -webkit-user-select: text;  /* Safari */
+    -ms-user-select: text;      /* IE 10 and IE 11 */
+    user-select: text;          /* Standard syntax */
 }
 
-/* Allow selection for specific elements if needed (like code blocks) */
+/* Allow selection for code blocks */
 pre, code {
     -webkit-user-select: text;
     -ms-user-select: text;
@@ -51,10 +52,10 @@ pre, code {
 
 body {
   overflow-x: hidden;
-  background-color: black;
-  color: white;
+  background-color: #0a0a0a;
+  color: #E0E0E0;
   font-family: 'Space Mono', monospace;
-  font-weight: 300;
+  font-weight: 400;
   font-style: normal;
   display: flex;
   flex-direction: column;
@@ -64,76 +65,182 @@ body {
   padding-top: 4em;
   padding-left: 5em;
   position: relative;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%; /* Prevent iOS text size adjustment */
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 @media screen and (max-width: 768px) {
   body {
-    padding: 1em;
-    font-size: 14px;
+    padding: 1.5em 1em;
+    font-size: 15px;
+    padding-top: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
   }
 
   .content-container {
-    padding: 1em;
-    max-width: 100vw;
+    padding: 0 1em;
+    max-width: 100%;
+    width: 100%;
   }
 
   header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1em 0.5em;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em 0;
+    margin-bottom: 1em;
+    width: 100%;
   }
 
-  header a {
-    margin: 0.5em 0;
+  #main-nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
   }
 
   /* Hide nav links by default on mobile */
   #main-nav a {
     display: none;
   }
+  
   /* Show nav links when nav is open */
+  #main-nav.open {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
   #main-nav.open a {
     display: block;
-    margin: 1em 0;
-    font-size: 1.2em;
+    margin: 0.8em 0;
+    font-size: 16px;
+    padding: 0.5em 0;
+    width: 100%;
+    min-height: 44px; /* Better touch target */
+    display: flex;
+    align-items: center;
   }
+  
   #nav-toggle {
     display: inline-block;
-    position: absolute;
-    right: 0;
-    top: 0;
+    background: none;
+    border: none;
+    color: #7460E0;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0.5em;
+    min-width: 44px;
+    min-height: 44px;
+    z-index: 10;
+  }
+
+  .tinu {
+    font-size: 18px;
+    margin-bottom: 1em;
+  }
+
+  .about {
+    margin-top: 2em;
+  }
+
+  .about-text {
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 100%;
+  }
+
+  .featured {
+    margin: 4em 0 3em 0;
+    max-width: 100%;
+  }
+
+  .featured-content {
+    padding-left: 1.2em;
+    margin-left: 0.3em;
+  }
+
+  .featured-title {
+    font-size: 1.1em;
+  }
+
+  .featured-project {
+    font-size: 1em;
+  }
+
+  .featured-description {
+    font-size: 14px;
+  }
+
+  .links-ti {
+    font-size: 14px;
+    margin-right: 1em;
+    display: block;
+    margin-bottom: 0.8em;
+    padding: 0.5em 0;
   }
 }
 
 @media screen and (max-width: 480px) {
   body {
-    padding: 0.5em;
-    font-size: 12px;
+    padding: 1em 0.8em;
+    font-size: 14px;
+    padding-top: 1.5em;
   }
 
   .content-container {
-    padding: 0.5em;
+    padding: 0 0.8em;
   }
 
   header {
-    padding: 0.5em;
+    padding: 0.8em 0;
   }
 
-  header a {
-    font-size: 12px;
+  #main-nav.open a {
+    font-size: 15px;
   }
 
   .tinu {
-    font-size: 16px;
+    font-size: 17px;
   }
+  
   .featured-title {
     font-size: 1em;
   }
+  
   .featured-project {
-    font-size: 1em;
-  }
-  .about-text {
     font-size: 0.95em;
+  }
+  
+  .about-text {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .featured-description {
+    font-size: 13px;
+  }
+
+  .links-ti {
+    font-size: 13px;
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  header a, .links-ti, .featured-link {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  
+  #nav-toggle {
+    min-width: 44px;
+    min-height: 44px;
   }
 }
 
@@ -142,10 +249,12 @@ body {
   font-size: 15px;
   text-decoration: none;
   color: #7460E0;
-  transition: color 0.2s ease;
+  transition: all 0.3s ease;
   font-family: 'Space Mono';
   font-weight: 700;
   display: inline-block;
+  margin-right: 1.5em;
+  padding: 0.3em 0;
 }
 
 #xdot-com {
@@ -157,7 +266,8 @@ body {
 }
 
 .links-ti:hover {
-  color: #CCCCCC;
+  color: #FFFFFF;
+  transform: translateX(3px);
 }
 
 .container {
@@ -199,7 +309,7 @@ h1 span {
 }
 
 .breadcrumbs {
-  background-color: #000000;
+  background-color: transparent;
   padding: 10px;
   margin-bottom: 10px;
 }
@@ -216,11 +326,16 @@ h1 span {
 }
 
 .about {
-  margin-top: 2em;
+  margin-top: 3em;
+  margin-bottom: 2em;
 }
 
 .about-text {
-  max-width: 600px;
+  max-width: 650px;
+  line-height: 1.8;
+  margin-bottom: 1.5em;
+  color: #D0D0D0;
+  font-size: 15px;
 }
 
 canvas {
@@ -230,12 +345,12 @@ canvas {
   width: 100%;
   height: 100%;
   z-index: -1;
-  opacity: 0.7;
+  opacity: 0.65; /* More visible but still subtle */
 }
 
 .featured {
     margin: 6em 0 4em 0;
-    max-width: 600px;
+    max-width: 650px;
 }
 
 .featured-title {
@@ -248,15 +363,18 @@ canvas {
 
 .featured-content {
     border-left: 2px solid #7460E0;
-    padding-left: 1.5em;
+    padding-left: 1.8em;
     margin-left: 0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }
 
 .featured-date {
-    font-size: 0.9em;
-    color: #666;
+    font-size: 0.85em;
+    color: #888;
     display: block;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.8em;
+    letter-spacing: 0.5px;
 }
 
 .featured-project {
@@ -268,9 +386,10 @@ canvas {
 }
 
 .featured-description {
-    color: #CCCCCC;
-    line-height: 1.6;
+    color: #D0D0D0;
+    line-height: 1.8;
     margin-top: 1em;
+    font-size: 15px;
 }
 
 .featured-link {
@@ -287,7 +406,7 @@ canvas {
 
 /* Adjust existing container styles */
 .content-container {
-    max-width: 800px;
+    max-width: 750px;
     width: 100%;
     margin: 0 auto;
     padding: 0 2em;
@@ -312,7 +431,8 @@ header a {
 
 /* Remove hover effect */
 header a:hover {
-  color: #CCCCCC;  /* Change to light color on hover */
+  color: #FFFFFF;  /* Change to light color on hover */
+  transition: color 0.3s ease;
 }
 
 /* Responsive navigation toggle */
@@ -329,47 +449,7 @@ header a:hover {
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-  .content-container {
-    padding: 1em;
-    max-width: 100vw;
-  }
-  header {
-    padding: 1em 0.5em;
-  }
-  /* Remove mobile nav toggle: always show nav links */
-  #main-nav a {
-    display: inline-block !important;
-    margin: 0 0.5em;
-    font-size: 1em;
-  }
-
-  #nav-toggle {
-    display: none !important;
-  }
-}
-
-/* Optional: adjust spacing for mobile */
-@media screen and (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1em 0.5em;
-  }
-  #main-nav a {
-    display: inline-block !important;
-    margin: 0 0.5em 0.5em 0;
-    font-size: 1em;
-  }
-}
-
-/* Optional: even smaller screens */
-@media screen and (max-width: 480px) {
-  #main-nav a {
-    font-size: 0.95em;
-    margin: 0 0.3em 0.5em 0;
-  }
-}
+/* Remove duplicate mobile styles - handled above */
 
 /* Make images and canvas responsive */
 canvas, img {

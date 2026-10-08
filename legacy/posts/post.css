@@ -1,10 +1,11 @@
+/* Allow text selection for better readability */
 * {
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
 
-/* Allow selection for specific elements if needed */
+/* Allow selection for code blocks */
 pre, code {
     -webkit-user-select: text;
     -ms-user-select: text;
@@ -53,10 +54,10 @@ pre, code {
 
 body {
   overflow-x: hidden;
-  background-color: black;
-  color: white;
+  background-color: #0a0a0a;
+  color: #E0E0E0;
   font-family: 'Space Mono', monospace;
-  font-weight: 300;
+  font-weight: 400;
   font-style: normal;
   display: flex;
   flex-direction: column;
@@ -68,24 +69,46 @@ body {
   min-height: 100vh;
   position: relative;
   z-index: 1;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  opacity: 0.7;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.65; /* More visible but still subtle */
 }
 
 .content-container {
-  max-width: 800px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 2em;
-  align-self: flex-start;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2em;
+    align-self: flex-start;
+}
+
+/* Improve paragraph readability */
+p {
+    margin-bottom: 1.5em;
+    color: #D0D0D0;
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 100%;
+}
+
+/* Better text selection */
+p, span, div, li {
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
 
 .posts-container {
@@ -114,16 +137,19 @@ canvas {
 }
 
 .posts-container .date {
-  font-size: 14px;
+  font-size: 13px;
   margin-right: 0.5em;
+  color: #888;
+  letter-spacing: 0.3px;
 }
 
 .post-link {
-    color: white;
+    color: #E0E0E0;
     text-decoration: none; 
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     position: relative;
+    transition: color 0.3s ease;
 }
 
 .post-link::after {
@@ -133,11 +159,12 @@ canvas {
     bottom: -1px; 
     width: 100%;
     height: 0.5px;
-    background-color: white;
+    background-color: #7460E0;
+    opacity: 0.5;
 }
 
 .post-link:hover {
-    color: #9580FF;
+    color: #7460E0;
 }
 
 
@@ -165,10 +192,105 @@ canvas {
 
 @media screen and (max-width: 768px) {
   body {
-    padding: 1em;
+    padding: 1.5em 1em;
+    font-size: 15px;
+    padding-top: 2em;
+  }
+
+  .content-container {
+    padding: 0 1em;
+    max-width: 100%;
+  }
+
+  .posts-container {
+    max-width: 100%;
+    margin: 1.5em auto;
+  }
+
+  .tinu {
+    font-size: 18px;
+    margin-bottom: 1em;
+  }
+
+  .breadcrumbs {
+    margin-bottom: 1.5em;
+  }
+
+  .search-wrapper {
+    margin: 1.5em 0;
+  }
+
+  .search-bar {
     font-size: 14px;
-    padding-left: 10%;
-    padding-right: 10%;
+    width: 120px;
+  }
+
+  .search-bar:focus {
+    width: 180px;
+  }
+
+  .post-link {
+    font-size: 14px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .posts-container .date {
+    font-size: 12px;
+  }
+
+  .morse-code {
+    margin-top: 2em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    padding: 1em 0.8em;
+    font-size: 14px;
+    padding-top: 1.5em;
+  }
+
+  .content-container {
+    padding: 0 0.8em;
+  }
+
+  .tinu {
+    font-size: 17px;
+  }
+
+  .search-bar {
+    font-size: 13px;
+    width: 100px;
+  }
+
+  .search-bar:focus {
+    width: 150px;
+  }
+
+  .post-link {
+    font-size: 13px;
+  }
+
+  .posts-container .date {
+    font-size: 11px;
+  }
+
+  .blog-list li {
+    margin-bottom: 1em;
+    flex-wrap: wrap;
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  .post-link, .search-icon {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -193,7 +315,8 @@ canvas {
 }
 
 .breadcrumbs a:hover {
-  color: #ffffff;
+    color: #FFFFFF;
+    transition: color 0.3s ease;
 }
 
 .morse-code {
@@ -223,14 +346,14 @@ canvas {
     padding: 0.5em 0;
     font-family: 'Space Mono', monospace;
     font-size: 15px;
-    color: #FFFFFF;
+    color: #E0E0E0;
     width: 150px;
     outline: none;
     transition: all 0.3s ease;
 }
 
 .search-bar:focus {
-    border-bottom-color: #CCCCCC;
+    border-bottom-color: #7460E0;
     width: 200px;
 }
 
