@@ -45,7 +45,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main className="flex-1">{children}</main>
           <Footer />
         </MotionProvider>
-        <div className="grain" aria-hidden />
       </body>
     </html>
   );

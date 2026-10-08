@@ -1,74 +1,48 @@
 "use client";
 
 import Link from "next/link";
-import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { formatDate, type Post } from "@/content/posts";
-import { ease } from "./motion";
 
 export function PostList({ posts, searchable = false }: { posts: Post[]; searchable?: boolean }) {
   const [query, setQuery] = useState("");
   const q = query.trim().toLowerCase();
   const shown = q
-    ? posts.filter((p) =>
-        [p.title, p.excerpt, ...p.tags].some((s) => s.toLowerCase().includes(q)),
-      )
+    ? posts.filter((p) => [p.title, p.excerpt, ...p.tags].some((s) => s.toLowerCase().includes(q)))
     : posts;
 
   return (
     <div>
       {searchable && (
-        <label className="mb-6 flex items-center gap-3 rounded-full border border-line bg-surface px-4 py-2.5 focus-within:border-muted">
-          <span className="font-mono text-xs text-dim">/</span>
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search posts, tags…"
-            className="w-full bg-transparent text-sm text-fg outline-none placeholder:text-dim"
-          />
-        </label>
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search posts"
+          aria-label="Search posts"
+          className="mb-8 w-full border-b border-line bg-transparent pb-2 text-fg outline-none placeholder:text-dim focus:border-muted"
+        />
       )}
 
-      <ul className="border-t border-line">
-        <AnimatePresence initial={false}>
-          {shown.map((post) => (
-            <motion.li
-              key={post.slug}
-              layout
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease }}
-              className="border-b border-line"
-            >
-              <Link
-                href={`/writing/${post.slug}`}
-                className="group grid gap-1 py-6 sm:grid-cols-[8rem_1fr_auto] sm:items-baseline sm:gap-6"
-              >
-                <span className="font-mono text-xs text-dim">{formatDate(post.date)}</span>
-                <span>
-                  <span className="flex items-center gap-2 text-xl font-medium tracking-[-0.02em] text-fg transition-transform duration-300 group-hover:translate-x-1">
-                    {post.title}
-                    {post.draft && (
-                      <span className="rounded-full border border-line px-2 py-0.5 font-mono text-[10px] font-normal text-dim">
-                        in progress
-                      </span>
-                    )}
-                  </span>
-                  <span className="mt-1 block text-sm leading-relaxed text-muted">{post.excerpt}</span>
-                </span>
-                <span className="hidden text-dim transition-all duration-300 group-hover:translate-x-1 group-hover:text-accent sm:block">
-                  →
-                </span>
-              </Link>
-            </motion.li>
-          ))}
-        </AnimatePresence>
+      <ul className="space-y-8">
+        {shown.map((post) => (
+          <li key={post.slug}>
+            <Link href={`/writing/${post.slug}`} className="group block">
+              <span className="font-serif text-2xl leading-snug text-fg underline decoration-transparent decoration-1 underline-offset-4 transition-colors group-hover:decoration-accent">
+                {post.title}
+              </span>
+              <span className="mt-1 block text-sm text-dim">
+                {formatDate(post.date)}
+                {post.tags.length > 0 && <> · {post.tags.join(", ")}</>}
+                {post.music && <> · ♪</>}
+                {post.draft && <> · in progress</>}
+              </span>
+              <span className="mt-2 block leading-relaxed text-muted">{post.excerpt}</span>
+            </Link>
+          </li>
+        ))}
       </ul>
-      {shown.length === 0 && (
-        <p className="py-10 text-center font-mono text-sm text-dim">nothing here yet. try another word?</p>
-      )}
+      {shown.length === 0 && <p className="text-dim">Nothing matches that. Try another word?</p>}
     </div>
   );
 }

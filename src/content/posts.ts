@@ -1,3 +1,18 @@
+/**
+ * A track readers can play while reading a post. The player uses the first of these that's set:
+ * - `src`: an audio file you have the rights to, placed in `public/music/` (e.g. "/music/song.mp3").
+ * - `youtube`: a YouTube link. Plays the full song for every reader.
+ * - `spotify`: a Spotify link. Full song only for readers logged into Spotify, otherwise a
+ *   30-second preview. When `youtube` is also set, it's shown as an "also on Spotify" link.
+ */
+export type Music = {
+  title: string;
+  artist: string;
+  src?: string;
+  youtube?: string;
+  spotify?: string;
+};
+
 export type Post = {
   slug: string;
   title: string;
@@ -6,6 +21,7 @@ export type Post = {
   excerpt: string;
   tags: string[];
   draft?: boolean;
+  music?: Music;
 };
 
 /**
@@ -20,6 +36,12 @@ export const posts: Post[] = [
     excerpt:
       "One of the seven Millennium Prize Problems: can every problem whose answer is quick to check also be solved quickly?",
     tags: ["cs", "math"],
+    music: {
+      title: "Swimming",
+      artist: "Flawed Mangoes",
+      youtube: "https://www.youtube.com/watch?v=5k7ccAEaY0Q",
+      spotify: "https://open.spotify.com/track/72z7FgU5p0iJ6cXGtAZ0f3",
+    },
     draft: true,
   },
   {
@@ -29,6 +51,12 @@ export const posts: Post[] = [
     excerpt:
       "Quantum part one: glowing iron rods, the ultraviolet catastrophe, and how Planck accidentally started a revolution.",
     tags: ["physics", "quantum"],
+    music: {
+      title: "Swimming",
+      artist: "Flawed Mangoes",
+      youtube: "https://www.youtube.com/watch?v=5k7ccAEaY0Q",
+      spotify: "https://open.spotify.com/track/72z7FgU5p0iJ6cXGtAZ0f3",
+    },
   },
   {
     slug: "welcome",
@@ -37,6 +65,12 @@ export const posts: Post[] = [
     excerpt:
       "If life had a console, what would your first line be? An intro to this open-source life project, one commit at a time.",
     tags: ["life"],
+    music: {
+      title: "Swimming",
+      artist: "Flawed Mangoes",
+      youtube: "https://www.youtube.com/watch?v=5k7ccAEaY0Q",
+      spotify: "https://open.spotify.com/track/72z7FgU5p0iJ6cXGtAZ0f3",
+    },
   },
 ];
 

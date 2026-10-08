@@ -1,142 +1,116 @@
 import Link from "next/link";
-import { Hero } from "@/components/hero";
-import { Marquee } from "@/components/marquee";
 import { Reveal } from "@/components/motion";
 import { PostList } from "@/components/post-list";
-import { ProjectCard } from "@/components/project-card";
-import { QuoteCycler } from "@/components/quote-cycler";
 import { posts } from "@/content/posts";
 import { experiments, projects } from "@/content/projects";
+import { currentlyReading } from "@/content/reading";
 import { site } from "@/content/site";
 
-const principles = [
-  {
-    title: "Start from the problem",
-    body: "Every project above starts with a sentence about what's broken. If I can't write that sentence, I'm not ready to build.",
-  },
-  {
-    title: "Ship the smallest real thing",
-    body: "Cut the MVP until it hurts, put it in front of people, and let usage tell me what to build next.",
-  },
-  {
-    title: "Decide once, write it down",
-    body: "Product rules live next to the code, so I don't re-argue them and the next person doesn't have to guess.",
-  },
-  {
-    title: "Design is part of the build",
-    body: "Copy, empty states and the first 10 seconds get the same care as the database schema.",
-  },
-];
-
-function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
+function Section({ title, children, more }: { title: string; children: React.ReactNode; more?: React.ReactNode }) {
   return (
-    <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-dim">
-      <span className="text-accent">{n}</span>
-      <span className="h-px w-8 bg-line" />
+    <Reveal className="mt-20">
+      <div className="mb-6 flex items-baseline justify-between">
+        <h2 className="font-serif text-2xl text-fg">{title}</h2>
+        {more}
+      </div>
       {children}
-    </p>
+    </Reveal>
   );
 }
 
 export default function Home() {
+  const reading = currentlyReading();
+
   return (
-    <>
-      <Hero />
-
-      <Marquee items={site.stack} />
-
-      <section id="work" className="mx-auto max-w-5xl scroll-mt-24 px-5 pt-28 sm:px-8">
-        <Reveal>
-          <SectionLabel n="01">Selected work</SectionLabel>
-          <h2 className="mt-5 max-w-2xl text-4xl font-semibold tracking-[-0.035em] text-fg sm:text-5xl">
-            Products I&apos;ve designed, built and{" "}
-            <span className="font-serif font-normal italic">shipped</span>.
-          </h2>
-        </Reveal>
-        <div className="mt-12 grid gap-5">
-          {projects.map((project, i) => (
-            <ProjectCard key={project.name} project={project} index={i} />
-          ))}
+    <div className="mx-auto max-w-2xl px-5 pt-20 sm:px-6">
+      <Reveal>
+        <h1 className="font-serif text-5xl leading-tight text-fg sm:text-6xl">{site.name}</h1>
+        <div className="mt-6 space-y-4 text-lg leading-relaxed text-soft">
+          <p>{site.intro}</p>
+          <p>
+            Right now I&apos;m building{" "}
+            <a className="link" href={projects[0].live} target="_blank" rel="noreferrer">
+              {projects[0].name}
+            </a>
+            {reading && (
+              <>
+                {" "}and reading <em className="text-fg">{reading.title}</em>
+              </>
+            )}
+            . I also <Link className="link" href="/writing">write</Link> about tech, physics and the
+            in-between moments.
+          </p>
         </div>
-      </section>
+      </Reveal>
 
-      <section className="mx-auto max-w-5xl px-5 pt-32 sm:px-8">
-        <Reveal>
-          <SectionLabel n="02">How I build</SectionLabel>
-          <h2 className="mt-5 max-w-2xl text-4xl font-semibold tracking-[-0.035em] text-fg sm:text-5xl">
-            A few rules I keep <span className="font-serif font-normal italic">relearning</span>.
-          </h2>
-        </Reveal>
-        <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2">
-          {principles.map((p, i) => (
-            <Reveal key={p.title} delay={i * 0.06} y={16} className="h-full">
-              <div className="h-full bg-surface p-7 sm:p-8">
-                <p className="font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</p>
-                <h3 className="mt-4 text-xl font-medium tracking-[-0.02em] text-fg">{p.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{p.body}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      <Section title="Building">
+        <ul className="divide-y divide-line border-y border-line">
+          {projects.map((p) => {
+            const href = p.live ?? p.repo;
+            return (
+              <li key={p.name}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group grid gap-1 py-5 sm:grid-cols-[1fr_auto] sm:gap-6"
+                >
+                  <span>
+                    <span className="text-fg underline decoration-transparent underline-offset-4 transition-colors group-hover:decoration-accent">
+                      {p.name}
+                    </span>
+                    <span className="mt-1 block text-sm leading-relaxed text-muted">{p.pitch}</span>
+                  </span>
+                  <span className="text-sm text-dim sm:text-right">
+                    {p.status.toLowerCase()} · {p.year}
+                  </span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </Section>
 
-      <section className="mx-auto max-w-5xl px-5 pt-32 sm:px-8">
-        <Reveal>
-          <SectionLabel n="03">Playground</SectionLabel>
-          <h2 className="mt-5 text-4xl font-semibold tracking-[-0.035em] text-fg sm:text-5xl">
-            Smaller builds &amp; <span className="font-serif font-normal italic">experiments</span>.
-          </h2>
-        </Reveal>
-        <div className="mt-10 grid gap-3 sm:grid-cols-2">
-          {experiments.map((e, i) => (
-            <Reveal key={e.name} delay={i * 0.05} y={12}>
-              <a
-                href={e.href}
-                target="_blank"
-                rel="noreferrer"
-                className="group flex items-center justify-between gap-4 rounded-2xl border border-line bg-surface px-5 py-4 transition-colors hover:border-muted"
-              >
-                <span>
-                  <span className="block font-medium text-fg">{e.name}</span>
-                  <span className="block text-sm text-muted">{e.note}</span>
-                </span>
-                <span className="shrink-0 text-right">
-                  <span className="block font-mono text-[11px] text-dim">{e.tag}</span>
-                  <span className="text-dim transition-colors group-hover:text-accent">↗</span>
-                </span>
+      <Section
+        title="Writing"
+        more={
+          <Link href="/writing" className="text-sm text-muted hover:text-fg">
+            all posts →
+          </Link>
+        }
+      >
+        <PostList posts={posts.slice(0, 4)} />
+      </Section>
+
+      <Section title="Smaller things">
+        <ul className="space-y-3">
+          {experiments.map((e) => (
+            <li key={e.name} className="flex flex-wrap items-baseline gap-x-3">
+              <a className="link" href={e.href} target="_blank" rel="noreferrer">
+                {e.name}
               </a>
-            </Reveal>
+              <span className="text-sm text-muted">{e.note}</span>
+            </li>
           ))}
-        </div>
-      </section>
+        </ul>
+      </Section>
 
-      <section className="mx-auto max-w-5xl px-5 pt-32 sm:px-8">
-        <Reveal>
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <SectionLabel n="04">Writing</SectionLabel>
-              <h2 className="mt-5 text-4xl font-semibold tracking-[-0.035em] text-fg sm:text-5xl">
-                Thinking <span className="font-serif font-normal italic">out loud</span>.
-              </h2>
-            </div>
-            <Link href="/writing" className="shrink-0 text-sm text-muted hover:text-fg">
-              All posts →
-            </Link>
-          </div>
-        </Reveal>
-        <Reveal className="mt-10">
-          <PostList posts={posts.slice(0, 3)} />
-        </Reveal>
-      </section>
-
-      <section className="mx-auto max-w-5xl px-5 pt-32 sm:px-8">
-        <Reveal>
-          <SectionLabel n="05">On repeat</SectionLabel>
-          <div className="mt-10">
-            <QuoteCycler />
-          </div>
-        </Reveal>
-      </section>
-    </>
+      <Section
+        title="Reading"
+        more={
+          <Link href="/reading" className="text-sm text-muted hover:text-fg">
+            bookshelf →
+          </Link>
+        }
+      >
+        <p className="text-soft">
+          Books and other things I&apos;ve been reading, with a line on what stuck. See the{" "}
+          <Link className="link" href="/reading">
+            bookshelf
+          </Link>
+          .
+        </p>
+      </Section>
+    </div>
   );
 }
