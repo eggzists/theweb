@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f6f5f1;
+  --surface: #ffffff;
+  --raise: #efeee8;
+  --line: #e2e0d8;
+  --fg: #161614;
+  --soft: #3c3c38;
+  --muted: #6b6a63;
+  --dim: #9a988f;
+  --accent: #4f7a00;
+  --accent-ink: #f6f5f1;
+  --glow: 0 0% 0%;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0b0c;
+    --surface: #131315;
+    --raise: #1b1b1e;
+    --line: #26262a;
+    --fg: #eeeeea;
+    --soft: #c9c9c3;
+    --muted: #94948d;
+    --dim: #62625c;
+    --accent: #d4ff3f;
+    --accent-ink: #0b0b0c;
+    --glow: 0 0% 100%;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-raise: var(--raise);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-soft: var(--soft);
+  --color-muted: var(--muted);
+  --color-dim: var(--dim);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-space-mono);
+  --font-serif: var(--font-instrument-serif);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* Film grain over everything; purely decorative. */
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Dotted grid used behind the hero. */
+.dot-grid {
+  background-image: radial-gradient(color-mix(in srgb, var(--fg) 14%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse at 30% 40%, black 20%, transparent 70%);
+}
+
+/* Long-form post typography. */
+.prose {
+  color: var(--soft);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+.prose > * + * {
+  margin-top: 1.25em;
+}
+.prose h2 {
+  margin-top: 2.4em;
+  color: var(--fg);
+  font-family: var(--font-instrument-serif);
+  font-size: 1.9rem;
+  font-style: italic;
+  line-height: 1.2;
+}
+.prose a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+.prose strong {
+  color: var(--fg);
+}
+.prose em {
+  color: var(--fg);
+}
+.prose code {
+  font-family: var(--font-space-mono);
+  font-size: 0.875em;
+  background: var(--raise);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.1em 0.4em;
+}
+.prose blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: 1.25em;
+  color: var(--fg);
+  font-family: var(--font-instrument-serif);
+  font-size: 1.45rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+.prose blockquote p + p {
+  margin-top: 0.4em;
+  font-family: var(--font-space-mono);
+  font-size: 0.8rem;
+  font-style: normal;
+  color: var(--muted);
+}
+.prose img {
+  margin-top: 2.5em;
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+}
+.prose .equation {
+  margin: 2em 0;
+  text-align: center;
+  color: var(--fg);
+  font-family: var(--font-instrument-serif);
+  font-size: 2.6rem;
+  font-style: italic;
+}
