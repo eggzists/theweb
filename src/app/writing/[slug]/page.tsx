@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { Reveal, ScrollProgress, WordsIn } from "@/components/motion";
+import { Reveal, ScrollProgress } from "@/components/motion";
+import { MusicPlayer } from "@/components/music-player";
 import { formatDate, getPost, posts } from "@/content/posts";
 
 export function generateStaticParams() {
@@ -14,7 +16,20 @@ export async function generateMetadata({ params }: PageProps<"/writing/[slug]">)
   return post ? { title: post.title, description: post.excerpt } : {};
 }
 
-export default async function PostPage({ params }: PageProps<"/writing/[slug]">) {
+// The shell renders immediately on navigation; the post itself depends on the URL,
+// so it reads `params` inside a Suspense boundary.
+export default function PostPage({ params }: PageProps<"/writing/[slug]">) {
+  return (
+    <article className="mx-auto max-w-2xl px-5 pt-20 sm:px-6">
+      <ScrollProgress />
+      <Suspense fallback={<div className="min-h-[60svh]" />}>
+        <PostContent params={params} />
+      </Suspense>
+    </article>
+  );
+}
+
+async function PostContent({ params }: { params: PageProps<"/writing/[slug]">["params"] }) {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) notFound();
@@ -25,29 +40,24 @@ export default async function PostPage({ params }: PageProps<"/writing/[slug]">)
   const newer = posts[index - 1];
 
   return (
-    <article className="mx-auto max-w-2xl px-5 pt-36 sm:px-8">
-      <ScrollProgress />
-      <Reveal y={8}>
-        <Link href="/writing" className="font-mono text-xs text-dim hover:text-fg">
-          ← all writing
-        </Link>
-      </Reveal>
-      <h1 className="mt-8 text-[clamp(2.4rem,6vw,4rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-fg">
-        <WordsIn text={post.title} delay={0.05} />
-      </h1>
-      <Reveal delay={0.3} y={8}>
-        <div className="mt-6 flex flex-wrap items-center gap-3 font-mono text-xs text-dim">
-          <span>{formatDate(post.date)}</span>
-          {post.tags.map((t) => (
-            <span key={t} className="rounded-full border border-line px-2 py-0.5">
-              {t}
-            </span>
-          ))}
-          {post.draft && <span className="text-accent">in progress</span>}
-        </div>
+    <>
+      <Reveal>
+        <header className="text-center">
+          <h1 className="font-serif text-5xl leading-[1.1] text-fg sm:text-6xl">{post.title}</h1>
+          <p className="mt-5 text-sm text-dim">
+            {formatDate(post.date)}
+            {post.tags.length > 0 && <> · {post.tags.join(", ")}</>}
+            {post.draft && <> · in progress</>}
+          </p>
+          {post.music && (
+            <p className="mt-2 text-sm text-dim">
+              ♪ {post.music.title} · {post.music.artist}
+            </p>
+          )}
+        </header>
       </Reveal>
 
-      <Reveal delay={0.4} y={16}>
+      <Reveal delay={0.15}>
         <div className="prose mt-14">
           <Body />
         </div>
@@ -57,25 +67,22 @@ export default async function PostPage({ params }: PageProps<"/writing/[slug]">)
         Got thoughts or suggestions? My DMs are open.
       </p>
 
-      <nav className="mt-16 grid gap-3 border-t border-line pt-8 sm:grid-cols-2">
+      <nav className="mt-12 flex justify-between gap-6 border-t border-line pt-6 text-sm">
         {older ? (
-          <Link href={`/writing/${older.slug}`} className="group rounded-2xl border border-line p-5 hover:border-muted">
-            <span className="font-mono text-[11px] text-dim">← older</span>
-            <span className="mt-1 block text-fg">{older.title}</span>
+          <Link href={`/writing/${older.slug}`} className="text-muted hover:text-fg">
+            ← {older.title}
           </Link>
         ) : (
           <span />
         )}
         {newer && (
-          <Link
-            href={`/writing/${newer.slug}`}
-            className="group rounded-2xl border border-line p-5 text-right hover:border-muted"
-          >
-            <span className="font-mono text-[11px] text-dim">newer →</span>
-            <span className="mt-1 block text-fg">{newer.title}</span>
+          <Link href={`/writing/${newer.slug}`} className="text-right text-muted hover:text-fg">
+            {newer.title} →
           </Link>
         )}
       </nav>
-    </article>
+
+      {post.music && <MusicPlayer key={post.slug} music={post.music} />}
+    </>
   );
 }
