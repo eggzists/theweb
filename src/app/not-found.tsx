@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ObserveAgain } from "@/components/observe-again";
 
 export default function NotFound() {
   return (
@@ -9,6 +10,7 @@ export default function NotFound() {
       <Link href="/" className="link mt-8 inline-block">
         Back home
       </Link>
+      <ObserveAgain />
     </div>
   );
 }

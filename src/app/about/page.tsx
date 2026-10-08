@@ -10,11 +10,11 @@ export const metadata: Metadata = {
 
 const brewing = [
   ["Product", "figuring out what's worth building, then building it"],
-  ["Web", "React, Next.js and Supabase, crafting digital Marauder's Maps"],
+  ["Web", "React, Next.js and Supabase, mostly for things with a map or a deadline in them"],
   ["Machine learning", "teaching robots to think so I don't have to"],
-  ["Python", "Parseltongue for coding wizards"],
-  ["C / C++", "for when Python moves slower than a troll in the dungeon"],
-  ["DSA", "sorting algorithms are basically Sorting Hat magic"],
+  ["Python", "the language I think in when a problem is still fuzzy"],
+  ["C / C++", "for when Python is taking the scenic route"],
+  ["DSA", "still convinced quicksort is a small miracle"],
 ];
 
 export default function AboutPage() {
@@ -25,8 +25,7 @@ export default function AboutPage() {
         <div className="mt-8 space-y-5 text-lg leading-relaxed text-soft">
           <p>
             Yo, I&apos;m Ti. A CS student from {site.location}, a product builder, a wannabe startup
-            founder and a lowkey ML wizard. A Ravenclaw at heart, but probably a Gryffindor because
-            of, well… Harry.
+            founder and a lowkey ML nerd. Curious first, everything else second.
           </p>
           <p>
             I learn for the thrill of it. My world is a blend of code, creativity and curiosity, and
@@ -34,7 +33,7 @@ export default function AboutPage() {
             use. Half the fun is figuring out what&apos;s worth making.
           </p>
           <p>
-            Away from the keyboard: reading (sometimes spellbooks; see the{" "}
+            Away from the keyboard: reading (see the{" "}
             <Link className="link" href="/reading">
               bookshelf
             </Link>
@@ -66,7 +65,7 @@ export default function AboutPage() {
           mechanics.&rdquo;
         </blockquote>
         <p className="mt-3 pl-5 text-sm text-muted">
-          Feynman. Same goes for my code, so let&apos;s learn together. Mischief managed. ⚡
+          Feynman. Same goes for my code, so let&apos;s learn together.
         </p>
       </Reveal>
     </div>

@@ -23,6 +23,14 @@ export default function ReadingPage() {
         </p>
       </Reveal>
 
+      {groups.length === 0 && (
+        <Reveal className="mt-16">
+          <p className="rounded-lg border border-dashed border-line px-6 py-8 text-muted">
+            The shelf is being restocked. Check back soon.
+          </p>
+        </Reveal>
+      )}
+
       {groups.map((group, i) => (
         <Reveal key={group.status} delay={0.05 * i} className="mt-16">
           <h2 className="mb-4 text-sm text-dim">{statusLabel[group.status]}</h2>

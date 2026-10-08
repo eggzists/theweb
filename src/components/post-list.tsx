@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatDate, type Post } from "@/content/posts";
+import { findEgg } from "@/lib/eggs";
 
 export function PostList({ posts, searchable = false }: { posts: Post[]; searchable?: boolean }) {
   const [query, setQuery] = useState("");
@@ -10,6 +11,11 @@ export function PostList({ posts, searchable = false }: { posts: Post[]; searcha
   const shown = q
     ? posts.filter((p) => [p.title, p.excerpt, ...p.tags].some((s) => s.toLowerCase().includes(q)))
     : posts;
+  const isAnswer = q === "42";
+
+  useEffect(() => {
+    if (isAnswer) findEgg("answer");
+  }, [isAnswer]);
 
   return (
     <div>
@@ -42,7 +48,14 @@ export function PostList({ posts, searchable = false }: { posts: Post[]; searcha
           </li>
         ))}
       </ul>
-      {shown.length === 0 && <p className="text-dim">Nothing matches that. Try another word?</p>}
+      {shown.length === 0 &&
+        (isAnswer ? (
+          <p className="font-serif text-2xl text-fg">
+            Don&apos;t panic. That&apos;s the answer; I&apos;m still working on the question.
+          </p>
+        ) : (
+          <p className="text-dim">Nothing matches that. Try another word?</p>
+        ))}
     </div>
   );
 }

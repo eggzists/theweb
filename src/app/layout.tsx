@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Instrument_Serif, Space_Mono } from "next/font/google";
+import { EggHunt } from "@/components/egg-hunt";
 import { Footer } from "@/components/footer";
 import { MotionProvider } from "@/components/motion";
 import { Nav } from "@/components/nav";
@@ -30,7 +31,6 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`,
   },
   description: site.tagline,
-  icons: { icon: "/images/title.jpg" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -44,6 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Nav />
           <main className="flex-1">{children}</main>
           <Footer />
+          <EggHunt />
         </MotionProvider>
       </body>
     </html>
