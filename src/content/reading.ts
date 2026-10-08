@@ -13,17 +13,9 @@ export type Reading = {
 
 /**
  * The bookshelf. Add entries anywhere; the page groups and orders them.
- * Only the entries below are real so far — add the rest of yours.
+ * Example: { title: "Hooked", author: "Nir Eyal", status: "reading" }
  */
-export const reading: Reading[] = [
-  {
-    title: "Harry Potter",
-    author: "J.K. Rowling",
-    status: "read",
-    kind: "book",
-    note: "Ravenclaw at heart, probably Gryffindor because of Harry. Still the source of most of my metaphors.",
-  },
-];
+export const reading: Reading[] = [];
 
 export const statusLabel: Record<Reading["status"], string> = {
   reading: "Reading now",

@@ -15,7 +15,7 @@ export const site = {
   now: {
     label: "Currently building",
     project: "ProductMinds",
-    href: "/#work",
+    href: "/projects/productminds",
   },
   stack: [
     "TypeScript",

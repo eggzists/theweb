@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { quotes } from "@/content/quotes";
+import { findEgg } from "@/lib/eggs";
 
 /** Click (or press Enter/Space) to step through the quotes. */
 export function QuoteCycler() {
@@ -12,7 +13,11 @@ export function QuoteCycler() {
   return (
     <button
       type="button"
-      onClick={() => setI((n) => (n + 1) % quotes.length)}
+      onClick={() => {
+        // Clicking past the last quote means they've read every one.
+        if (i === quotes.length - 1) findEgg("quotes");
+        setI((i + 1) % quotes.length);
+      }}
       className="group block w-full cursor-pointer text-left"
       aria-label="Show the next quote"
     >

@@ -128,3 +128,18 @@ body {
   font-size: 2.4rem;
   font-style: italic;
 }
+
+/* Konami code easter egg. */
+@keyframes barrel-roll {
+  to {
+    transform: rotate(360deg);
+  }
+}
+html.barrel-roll body {
+  animation: barrel-roll 1.1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  html.barrel-roll body {
+    animation: none;
+  }
+}

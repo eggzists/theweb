@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/content/site";
+import { Morse } from "./morse";
 
 export function Footer() {
   return (
@@ -25,9 +26,7 @@ export function Footer() {
           </Link>
         </div>
       </div>
-      <p className="mt-8 font-mono text-xs text-dim" title="Morse for E N D">
-        . -. -..
-      </p>
+      <Morse />
     </footer>
   );
 }
