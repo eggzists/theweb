@@ -141,4 +141,9 @@ export const quotes: Quote[] = [
     author: "Dylan Thomas",
     context: "1951",
   },
+  {
+    text: "Life moves pretty fast. If you don't stop and look around once in a while, you could miss it.",
+    author: "Ferris Bueller",
+    context: "Ferris Bueller's Day Off",
+  },
 ];

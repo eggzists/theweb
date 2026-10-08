@@ -30,6 +30,14 @@ export type Post = {
  */
 export const posts: Post[] = [
   {
+    slug: "in-a-blink",
+    title: "in a blink",
+    date: "2026-10-08",
+    excerpt:
+      "BTech's done, startup life has begun, and Ferris Bueller was right: life moves pretty fast.",
+    tags: ["life"],
+  },
+  {
     slug: "p-vs-np",
     title: "p vs np",
     date: "2025-07-01",
