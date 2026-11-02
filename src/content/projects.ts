@@ -1,6 +1,16 @@
 import type { StaticImageData } from "next/image";
+import pmCrewDesktop from "./shots/productminds-crew-desktop.jpg";
+import pmHomeDesktop from "./shots/productminds-home-desktop.jpg";
 import pmLoginDesktop from "./shots/productminds-login-desktop.jpg";
 import pmLoginMobile from "./shots/productminds-login-mobile.jpg";
+import pmPostsDesktop from "./shots/productminds-posts-desktop.jpg";
+import pmVoyageDesktop from "./shots/productminds-voyage-desktop.jpg";
+import raAskMobile from "./shots/raasta-ask-mobile.jpg";
+import raCareersDesktop from "./shots/raasta-careers-desktop.jpg";
+import raHomeDesktop from "./shots/raasta-home-desktop.jpg";
+import raHomeMobile from "./shots/raasta-home-mobile.jpg";
+import raMythsMobile from "./shots/raasta-myths-mobile.jpg";
+import raQuizMobile from "./shots/raasta-quiz-mobile.jpg";
 import ugAboutMobile from "./shots/ungatekeep-about-mobile.jpg";
 import ugHomeDesktop from "./shots/ungatekeep-home-desktop.jpg";
 import ugHomeMobile from "./shots/ungatekeep-home-mobile.jpg";
@@ -91,18 +101,131 @@ export const projects: Project[] = [
     ],
     stack: ["Next.js 16", "React 19", "Supabase", "Tailwind 4", "TypeScript"],
     live: "https://productminds.vercel.app",
-    shotsNote: "The portal itself is members-only, so this is the front door.",
+    shotsNote: "The portal is members-only, so these are from an admin account.",
     shots: [
       {
         src: pmLoginDesktop,
-        alt: "ProductMinds sign-in screen on desktop: \"Come aboard.\" with member ID and password fields",
-        caption: "Sign in with the member ID your admin gives you.",
+        alt: "ProductMinds sign-in screen on desktop: \"Come aboard.\" with a Continue with Google button",
+        caption: "Sign in with the Google account your admin added to the roster.",
+        device: "desktop",
+      },
+      {
+        src: pmHomeDesktop,
+        alt: "ProductMinds home: an admin-only row of counts, then cards for sessions, your stake and this week's checkpoint",
+        caption: "Home. Admins get a row of what needs doing; everything below it is what every member sees.",
+        device: "desktop",
+      },
+      {
+        src: pmVoyageDesktop,
+        alt: "ProductMinds Voyage page: four phases across the top and each week's sessions listed with their status",
+        caption: "The voyage, phase by phase and session by session.",
+        device: "desktop",
+      },
+      {
+        src: pmCrewDesktop,
+        alt: "ProductMinds Crew page: a table of members with attendance, posts and stake",
+        caption: "Crew, as admins see it.",
+        device: "desktop",
+      },
+      {
+        src: pmPostsDesktop,
+        alt: "ProductMinds Posts page for admins with an empty queue: \"Nothing to check.\"",
+        caption: "Admins confirm each post before it counts toward the stake.",
         device: "desktop",
       },
       {
         src: pmLoginMobile,
         alt: "ProductMinds sign-in screen on a phone",
         caption: "Built phone-first, like everything inside.",
+        device: "mobile",
+      },
+    ],
+  },
+  {
+    slug: "raasta",
+    name: "Raasta",
+    year: "2026",
+    status: "Live",
+    kind: "Career guidance for students",
+    pitch: "Find a career that fits you, with honest pay, real cutoffs and no sign-up.",
+    problem:
+      "Choosing a stream, then a course, then a college is one of the biggest decisions a student makes, and most of the information out there is scattered, sales-driven or written for people who already know what they want. About 1 in 10 students in India get any professional career guidance, and the tests and counselling that exist often cost ₹1,000 to ₹5,000.",
+    features: [
+      {
+        title: "Start from what you know",
+        body: "Four ways in: I know my stream, I'm choosing a college, I'm deciding between two careers, and I've heard something and want to check it.",
+      },
+      {
+        title: "A 1-minute quiz",
+        body: "Six everyday questions, like what you'd pick on a free Saturday. No wrong answers, and the result is a starting point, not a verdict.",
+      },
+      {
+        title: "41 careers, 64 colleges",
+        body: "Search and filter careers by field, see which streams lead to each, and compare colleges on cutoffs, fees and placements.",
+      },
+      {
+        title: "Compare two careers",
+        body: "Pay, subjects, exams and the path to get there, side by side.",
+      },
+      {
+        title: "Myth buster",
+        body: "\"Only IIT matters.\" \"Design and art don't pay.\" The things people tell students, checked against real data.",
+      },
+      {
+        title: "Ask Raasta",
+        body: "An AI guide that answers from Raasta's checked data and can use your quiz result, stream and saved careers if you've shared them. Chats aren't saved.",
+      },
+    ],
+    decisions: [
+      "No sign-up. Saved careers stay on the device, with a way to move them to another one.",
+      "Every pay, fee and cutoff figure is labelled official, reported or a rough estimate, and each career links to the official site.",
+      "The quiz and suggestions are starting points to talk through with family and teachers, not decisions.",
+      "Analytics count anonymous views and steps, with no cookies and nothing that identifies a student.",
+      "Career stress is normal, so every page points to Tele-MANAS (14416), the government's free 24x7 helpline.",
+    ],
+    facts: [
+      { value: "41", label: "careers" },
+      { value: "64", label: "colleges" },
+      { value: "6", label: "quiz questions" },
+      { value: "0", label: "sign-ups needed" },
+    ],
+    stack: ["Next.js", "Vercel"],
+    live: "https://raastaai.vercel.app",
+    shots: [
+      {
+        src: raHomeDesktop,
+        alt: "Raasta home page: \"Find a career that fits you\" with a quiz button and four ways to start",
+        caption: "Start from what you already know.",
+        device: "desktop",
+      },
+      {
+        src: raCareersDesktop,
+        alt: "Raasta Explore careers page with search, field filters and career cards tagged by stream",
+        caption: "41 careers, filterable by field and tagged by stream.",
+        device: "desktop",
+      },
+      {
+        src: raHomeMobile,
+        alt: "Raasta home page on a phone with a bottom tab bar",
+        caption: "Built for the phone most students actually have.",
+        device: "mobile",
+      },
+      {
+        src: raQuizMobile,
+        alt: "Raasta quiz on a phone: \"A free Saturday. What do you pick?\" with four options",
+        caption: "Six questions. Go with your first instinct.",
+        device: "mobile",
+      },
+      {
+        src: raMythsMobile,
+        alt: "Raasta myth buster on a phone listing common myths about streams and careers",
+        caption: "Myths, checked against data.",
+        device: "mobile",
+      },
+      {
+        src: raAskMobile,
+        alt: "Ask Raasta on a phone: an AI guide with suggested questions",
+        caption: "An AI guide that answers from Raasta's own data.",
         device: "mobile",
       },
     ],
